@@ -27,12 +27,16 @@ It returns a pass message
 grammar_checker("How are you?") => "Grammar check passed - well done!"
 
 """
+Given text that starts with a capital letter and does not end with any punctuation
+It returns a failed message
+"""
+grammar_checker("How are you") => "Grammar check FAILED - try again!"
 
 Given text that starts with a capital letter and does not end with appropriate punctuation
 It returns a failed message
 """
 
-grammar_checker("How are you") => "Grammar check FAILED - try again!"
+grammar_checker("How are you@") => "Grammar check FAILED - try again!"
 """
 
 Given text that does not start with a capital letter and does end with appropriate punctuation
