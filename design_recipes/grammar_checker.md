@@ -27,6 +27,20 @@ It returns a pass message
 grammar_checker("How are you?") => "Grammar check passed - well done!"
 
 """
+
+Given text that starts with a capital letter and ends with appropriate punctuation
+It returns a pass message
+"""
+grammar_checker("Hello World!") => "Grammar check passed - well done!"
+
+"""
+Given text that starts with a capital letter and ends with appropriate punctuation
+It returns a pass message
+"""
+grammar_checker("Hello World.") => "Grammar check passed - well done!"
+
+"""
+
 Given text that starts with a capital letter and does not end with any punctuation
 It returns a failed message
 """
@@ -59,8 +73,14 @@ It raises an error message
 grammar_checker("") => "Text input must not be empty."
 """
 
-Given any input that s not a string
+Given any input that is not a string
 It raises an error message
 """
 grammar_checker(['Hello', 'how', 'are', 'you', '?']) => "Text must be a valid string"
+"""
+
+Given any input that is None value
+It raises an error message
+"""
+grammar_checker(None) => "Text must be a valid string"
 """
