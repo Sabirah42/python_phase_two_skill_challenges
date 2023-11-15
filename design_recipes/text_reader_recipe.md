@@ -29,6 +29,8 @@ It prints time taken in a formatted string
 """
 text_reader("_400 words in body of this text_") => "It would take you 2 minutes to read this text."
 
+text_reader("_700 words in body of this text_") => "It would take you 4 minutes to read this text."
+
 """
 Given a body of text with fewer than 200 words
 It returns time taken to read the text
