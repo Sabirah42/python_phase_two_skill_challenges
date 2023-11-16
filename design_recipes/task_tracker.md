@@ -51,7 +51,7 @@ task_tracker("") => "Input value must not be empty"
 Given a None value
 It raises an error
 """
-task_tracker(None) => "Input value must not be empty"
+task_tracker(None) => "Input value must be a string"
 """
 
 Given a value that is not a string

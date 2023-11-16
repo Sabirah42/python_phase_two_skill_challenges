@@ -27,3 +27,15 @@ def test_task_tracker_raises_error_for_empty_string():
     error_message = str(e.value)
     assert error_message == "Input value must not be empty"
 
+def test_task_tracker_raises_error_for_none_value():
+    with pytest.raises(Exception) as e:
+        task_tracker(None)
+    error_message = str(e.value)
+    assert error_message == "Input value must be a string"
+
+def test_task_tracker_raises_error_for_non_string_type():
+    with pytest.raises(Exception) as e:
+        task_tracker([1, 2, 3, 4])
+    error_message = str(e.value)
+    assert error_message == "Input value must be a string"
+
