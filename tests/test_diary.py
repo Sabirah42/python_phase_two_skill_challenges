@@ -1,4 +1,3 @@
-import pytest
 from lib.diary import *
 
 def test_diary_initialises_with_title_and_contents():
