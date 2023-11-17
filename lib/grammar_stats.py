@@ -1,6 +1,7 @@
 class GrammarStats:
     def __init__(self):
-        pass
+        self.passed = 0
+        self.failed = 0
 
     def check(self, text):
         correct_punc = set('?!.')
@@ -9,12 +10,14 @@ class GrammarStats:
         capitalisation = text[0].isupper()
 
         if appropriate_punctuation and capitalisation:
+            self.passed += 1
             return True
         else:
+            self.failed += 1
             return False
 
     def percentage_good(self):
-        # Returns:
-        #   int: the percentage of texts checked so far that passed the check
-        #        defined in the `check` method. The number 55 represents 55%.
-        pass
+        ## needs to log when True and log when False (will need to amend 'check')
+        ## calculates percentage from these nums
+        total = self.passed + self.failed
+        return self.passed / total * 100
