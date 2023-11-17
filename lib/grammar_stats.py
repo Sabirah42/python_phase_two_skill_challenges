@@ -3,12 +3,15 @@ class GrammarStats:
         pass
 
     def check(self, text):
-        # Parameters:
-        #   text: string
-        # Returns:
-        #   bool: true if the text begins with a capital letter and ends with a
-        #         sentence-ending punctuation mark, false otherwise
-        pass
+        correct_punc = set('?!.')
+        
+        appropriate_punctuation = any((punc in correct_punc) for punc in text[-1])
+        capitalisation = text[0].isupper()
+
+        if appropriate_punctuation and capitalisation:
+            return True
+        else:
+            return False
 
     def percentage_good(self):
         # Returns:
