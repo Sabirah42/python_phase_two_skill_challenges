@@ -1,4 +1,4 @@
-from lib.diary import *
+from lib.diary_entry import *
 
 def test_diary_initialises_with_title_and_contents():
     diary = DiaryEntry("Day one", "Dear Diary...")

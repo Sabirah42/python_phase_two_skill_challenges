@@ -1,48 +1,44 @@
-class DiaryEntry:
-    def __init__(self, title, contents):
-        self.title = title
-        self.contents = contents
+import math
 
-    def format(self):
-        return f'{self.title}: {self.contents}'
+class Diary:
+    def __init__(self):
+        self.diary_entries = []
+
+    def add(self, entry):
+        self.diary_entries.append(entry)
+
+    def all(self):
+        return self.diary_entries
 
     def count_words(self):
-        ## take formatted entry
-        ## count words len(.split)
-        ## return
-        return len(self.format().split())
-
-    def reading_time(self, wpm):
-        # Parameters:
-        #   wpm: an integer representing the number of words the user can read 
-        #        per minute
-        # Returns:
-        #   int: an estimate of the reading time in minutes for the contents at
-        #        the given wpm.
+        total = 0
         
-        ## take self.count_words/wpm
-        ## change type to int?
-        ## return
-        return int(self.count_words()/wpm)
+        for entry in self.diary_entries:
+            total += entry.count_words()
 
-    def reading_chunk(self, wpm, minutes):
-        # Parameters
-        #   wpm: an integer representing the number of words the user can read
-        #        per minute
+        return total
+
+    def reading_time(self, wpm): 
+        if self.diary_entries == []:
+            raise Exception("No diary entries added")      
+        return math.ceil(self.count_words()/wpm)
+
+    def find_best_entry_for_reading_time(self, wpm, minutes):
+        # Parameters:
+        #   wpm:     an integer representing the number of words the user can
+        #            read per minute
         #   minutes: an integer representing the number of minutes the user has
         #            to read
         # Returns:
-        #   string: a chunk of the contents that the user could read in the
-        #           given number of minutes
-        #
-        # If called again, `reading_chunk` should return the next chunk,
-        # skipping what has already been read, until the contents is fully read.
-        # The next call after that should restart from the beginning.
-        
-        ## take wpm * minutes
-        ## then return spliced diary entry
-        chunk_length = wpm * minutes
-        split_entry = (self.format().split())[0:chunk_length]
-        reading_chunk = " ".join(split_entry)
+        #   An instance of DiaryEntry representing the entry that is closest to,
+        #   but not over, the length that the user could read in the minutes
+        #   they have available given their reading speed.
 
-        return reading_chunk
+        max_words = wpm * minutes
+
+        readable_entries = []
+
+        for entry in self.diary_entries:
+            if entry.count_words() <= max_words:
+                readable_entries.append(entry)
+        return readable_entries[0]
