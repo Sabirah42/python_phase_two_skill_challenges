@@ -1,3 +1,4 @@
+import pytest
 from lib.diary import *
 from lib.diary_entry import *
 
@@ -79,6 +80,12 @@ def test_diary_returns_shorter_entry_for_5():
 
     assert diary.find_best_entry_for_reading_time(5, 2) == entry_2
 
+"""
+When we add two diary entries, one short and one long
+And we call find_best_entry_for_reading_time with 100 wpm and 2 minutes
+We get back the longer diary entry
+"""
+
 def test_diary_returns_longer_entry_for_100():
     diary = Diary()
     entry_1 = DiaryEntry("Day One", "One " * 50)
@@ -87,6 +94,26 @@ def test_diary_returns_longer_entry_for_100():
     diary.add(entry_2)
 
     assert diary.find_best_entry_for_reading_time(100, 2) == entry_1
+
+"""
+When we add two diary entries, neither of which is readable in the given time
+And we call find_best_entry_for_reading_time with 1 wpm and 2 minutes
+We get back an empty list
+"""
+def test_diary_returns_empty_list():
+    diary = Diary()
+    entry_1 = DiaryEntry("Day One", "One " * 50)
+    entry_2 = DiaryEntry("Day Two", "Two " * 10)
+    diary.add(entry_1)
+    diary.add(entry_2)
+
+    assert diary.find_best_entry_for_reading_time(1, 2) == None
+
+"""
+When we add three diary entries, all readable within the given time
+And we call find_best_entry_for_reading_time
+We get back the longest possible diary entry
+"""    
 
 def test_diary_returns_longest_possible_entry_for_200():
     diary = Diary()
@@ -97,4 +124,22 @@ def test_diary_returns_longest_possible_entry_for_200():
     diary.add(entry_2)
     diary.add(entry_3)
 
+    print(f'entry 1: {entry_1}')
+    print(f'entry 2: {entry_2}')
+    print(f'entry 3: {entry_3}')
+
+
     assert diary.find_best_entry_for_reading_time(200, 2) == entry_3
+
+"""
+When no diary entries have been added
+And we call find_best_entry_for_reading_time
+We get an error meessage
+"""    
+
+def test_diary_returns_longest_possible_entry_for_200():
+    diary = Diary()
+    with pytest.raises(Exception) as e:
+        diary.find_best_entry_for_reading_time(200, 2)
+    error_message = str(e.value)
+    assert error_message == "No diary entries added"

@@ -33,12 +33,17 @@ class Diary:
         #   An instance of DiaryEntry representing the entry that is closest to,
         #   but not over, the length that the user could read in the minutes
         #   they have available given their reading speed.
-
+        if self.diary_entries == []:
+            raise Exception("No diary entries added")
+            
         max_words = wpm * minutes
 
-        readable_entries = []
+        most_readable = None
+        longest_entry_count = 0
 
         for entry in self.diary_entries:
-            if entry.count_words() <= max_words:
-                readable_entries.append(entry)
-        return readable_entries[0]
+            if entry.count_words() <= max_words and entry.count_words() > longest_entry_count:
+                most_readable = entry
+                longest_entry_count = entry.count_words()
+
+        return most_readable

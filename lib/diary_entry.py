@@ -2,6 +2,7 @@ class DiaryEntry:
     def __init__(self, title, contents):
         self.title = title
         self.contents = contents
+        self.stop_point = 0
 
     def format(self):
         return f'{self.title}: {self.contents}'
@@ -41,8 +42,25 @@ class DiaryEntry:
         
         ## take wpm * minutes
         ## then return spliced diary entry
+
+
         chunk_length = wpm * minutes
-        split_entry = (self.format().split())[0:chunk_length]
-        reading_chunk = " ".join(split_entry)
+        all_words = self.format().split()
+
+        print(f'all words: {all_words}')
+        print(f'stop point: {self.stop_point}')
+        print(f'length of all words: {len(all_words)}')
+
+        if self.stop_point >= len(all_words):
+            self.stop_point = 0
+
+        start_point = self.stop_point
+        end_point = self.stop_point + chunk_length
+
+        chunk_of_words = all_words[start_point:end_point]
+        print(f'chunk of words: {chunk_of_words}')
+        self.stop_point = end_point
+
+        reading_chunk = " ".join(chunk_of_words)
 
         return reading_chunk
