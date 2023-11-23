@@ -1,4 +1,3 @@
-import pytest
 from lib.todo_list import *
 
 def test_initialises_with_empty_list():
